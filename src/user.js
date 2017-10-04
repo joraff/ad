@@ -234,6 +234,10 @@ module.exports = {
         includeMembership: ['all'],
         includeDeleted: false
       };
+      if( opts ) {
+        if( opts.fields && opts.fields.length ) params.attributes = ['*']
+        if( opts.attributes && opts.attributes.length ) params.attributes = opts.attributes
+      }
       this.ad.find(params, (err, results) => {
         if (err) {
           /* istanbul ignore next */
