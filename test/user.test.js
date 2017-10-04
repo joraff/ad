@@ -135,17 +135,23 @@ test('user(user).get(opts) should take filter options', async () => {
   expect(results.givenName).not.toBeUndefined();
 });
 
-test('user(user).get({filter: []}) should take filter option for all attributes', async () => {
-  let results = await ad.user('test51').get({
-    fields: 'all'
-  });
+test('user(user).get(opts) should take filter option for all attributes', async () => {
+  let results = await ad
+    .cache(false)
+    .user('test51')
+    .get({
+      fields: 'all'
+    });
   expect(results.whenCreated).toBeDefined();
 });
 
-test('user(user).get({filter: []}) should take filter option for attributes not in the default attribute set', async () => {
-  let results = await ad.user('test51').get({
-    fields: ['whenCreated']
-  });
+test('user(user).get(opts) should take filter option for attributes not in the default attribute set', async () => {
+  let results = await ad
+    .cache(false)
+    .user('test51')
+    .get({
+      fields: ['whenCreated']
+    });
   expect(results.whenCreated).toBeDefined();
 });
 
